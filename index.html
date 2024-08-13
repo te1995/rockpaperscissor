@@ -4,54 +4,166 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-
-        var humanScore = 0;
-        var computerScore = 0;
-
-        function getComputerChoice() {
-            var randomNumber = Math.random();
-            if(randomNumber <= 0.33) {
-                return "rock";
-            } else if(randomNumber >= 0.33 && randomNumber <= 0.67) {
-                return "paper";
-            } else {
-                return "scissor";
-            }
-        }
-
-        function getHumanChoice() {
-            while(true) {
-                var choice = prompt("Enter rock/paper/scissor");
-                if(choice == "rock" || choice == "scissor" || choice == "paper") {
-                    return choice;
-                } else {
-                    continue;
-                }
-            }
-        }
-
-        function playRound() {
-            var comp = getComputerChoice();
-            var human = getHumanChoice();
-
-            if(comp == "scissor" && human == "paper" || comp == "rock" && human == "scissor") {
-                computerScore++;
-                console.log("You lost! " + comp + " beats " + human);
-            } else if(human == "scissor" && comp == "paper" || human == "rock" && comp == "scissor") {
-                humanScore++;
-                console.log("You won! " + human + " beats " + comp);
-            } else {
-                console.log("Its a draw!")
-            }
-
-            console.log("Human: " + humanScore + " Computer: " + computerScore);
-            playRound();
-
-        }
-    </script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
+    <div class = "header"><p>Duel of Marge, Homie & Bart</p></div>
+    <div class = "firstRow">
+        <div class = "scoreSheetHuman">
+            <img src="images/barneygpt.png" alt="Picture of a cartoon men, holding a sign" width="auto", height="300px">
+            <p>Human</p>
+            <div class = "scoreHuman"> 0 </div>
+        </div>
+        <div class = "textfield"></div>
+        <div class = "scoreSheetComputer">
+            <img src="images/preview.png" alt="Picture of a Cartoon roboter,  holding a sign" width="auto", height="300px">
+            <p>Computer</p>
+            <div class = "scoreComputer"> 0 </div>
+        </div>
+    </div>
+    <div class = "description">
+        <h1>The Simpsons Rock-Paper-Scissor Rule's</h1>
+        <p class = "rules">Bart beat's homer, Homer beats Marge and Marge beats Bart. The first reaching 5 wins, is the winner. Ready?</p>
+    </div>
+
+    <div class = "buttons">
+            <button class="bart-button" style="background: none; border: none; padding: 0; cursor: pointer;">
+    <img class="bart" src="images/buttonbart.png" alt="Button Bart" style="width: 250px; height: 125px;">
+</button>
+
+<button class="marge-button" style="background: none; border: none; padding: 0; cursor: pointer;">
+    <img class="marge" src="images/buttonmarge.png" alt="Button Marge" style="width: 250px; height: 125px;">
+</button>
+
+<button class="homer-button" style="background: none; border: none; padding: 0; cursor: pointer;">
+    <img class="homer" src="images/buttonhomer.png" alt="Button Homer" style="width: 250px; height: 125px;">
+</button>
+    </div>
+    <div class = "footer"> Created by te1995</div>
 </body>
+<script>
+    let humanScore = 0;
+    let computerScore = 0;
+    let playerSelection = ""
+    let divPar = document.querySelector(".parent");
+
+    const buttonBart = document.querySelector(".bart");
+    buttonBart.addEventListener("click", actionClick);
+
+    const buttonMarge = document.querySelector(".marge")
+    buttonMarge.addEventListener("click", actionClick);
+
+    const buttonHomer = document.querySelector(".homer");
+    buttonHomer.addEventListener("click", actionClick);
+
+    function actionClick(e) {
+        playerSelection = e.target.className;
+        playRound();
+    }
+
+
+    function getComputerChoice() {
+        let randomNumber = Math.random();
+        if(randomNumber <= 0.33) {
+            return "marge";
+        } else if(randomNumber >= 0.33 && randomNumber <= 0.67) {
+            return "homer";
+        } else {
+            return "bart";
+        }
+    }
+
+    function getHumanChoice() {
+        return playerSelection;
+    }
+
+    function playRound() {
+        let comp = getComputerChoice();
+        let human = getHumanChoice();
+        let textField = document.querySelector(".textfield");
+
+
+        if(humanScore == 5) {
+            textField.textContent = "Congrats! You have 5 wins and won the game! Again?";
+            let buttonRepeat = document.createElement("button");
+            textField.appendChildren(buttonRepeat);
+            return;
+        }
+
+
+        if((comp == "bart" && human == "homer") || (comp == "homer" && human == "bart") || (comp == "marge" && human == "bart")) {
+            computerScore++;
+            let scoreComp = document.querySelector(".scoreComputer");
+            scoreComp.textContent = computerScore;
+            
+            if(computerScore == 5) {
+                textField.textContent = "Oh no! Computer has 5 wins and won the games! Again?";
+                let buttonRepeat = document.createElement("button");
+                textField.appendChild(buttonRepeat);
+                buttonRepeat.textContent = "Play Again"; // Add text to the button
+                buttonRepeat.style.padding = "10px";
+                buttonRepeat.style.color = "#f8db27"; 
+                buttonRepeat.style.backgroundColor = "transparent";
+                buttonRepeat.style.marginTop = "30px";
+                buttonRepeat.style.fontWeight = "bold";
+                buttonRepeat.style.fontSize = "1.2em";
+                buttonRepeat.style.border = "3px solid black";
+                buttonRepeat.addEventListener("click", function resetGame() {
+    // Reset scores and UI elements
+                humanScore = 0;
+                computerScore = 0;
+
+                document.querySelector(".scoreHuman").textContent = humanScore;
+                document.querySelector(".scoreComputer").textContent = computerScore;
+                document.querySelector(".textfield").textContent = "";
+
+    // Remove the Play Again button after it's clicked
+                let buttonRepeat = document.querySelector(".textfield button");
+                if (buttonRepeat) {
+                    buttonRepeat.remove();
+                }
+            });
+            } else {
+                textField.textContent = "Oh no! Computer won!"
+            }
+        } else if((human == "bart" && comp == "homer") || (human == "homer" && comp == "bart") || (human == "marge" && comp == "bart")) {
+            humanScore++;
+            let scoreHum = document.querySelector(".scoreHuman");
+            scoreHum.textContent = humanScore;
+            if(computerScore == 5) {
+                textField.textContent = "Oh no! Computer has 5 wins and won the games! Again?";
+                let buttonRepeat = document.createElement("button");
+                textField.appendChild(buttonRepeat);
+                buttonRepeat.textContent = "Play Again"; // Add text to the button
+                buttonRepeat.style.color = "#f8db27"; 
+                buttonRepeat.style.backgroundColor = "transparent";
+                buttonReapeat.style.marginTop = "10px";
+                buttonRepeat.addEventListener("click", function resetGame() {
+    // Reset scores and UI elements
+                humanScore = 0;
+                computerScore = 0;
+
+                document.querySelector(".scoreHuman").textContent = humanScore;
+                document.querySelector(".scoreComputer").textContent = computerScore;
+                document.querySelector(".textfield").textContent = "";
+
+    // Remove the Play Again button after it's clicked
+                let buttonRepeat = document.querySelector(".textfield button");
+                if (buttonRepeat) {
+                    buttonRepeat.remove();
+                }
+            });
+         
+
+            } else {
+                textField.textContent = "Human won!";
+            }
+        } else {
+            textField.textContent = "It's a draw!"
+        }
+
+        console.log("Human: " + humanScore + " Computer: " + computerScore);
+
+    }
+</script>
 </html>

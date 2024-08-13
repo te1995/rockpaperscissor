@@ -1,0 +1,142 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: #ff81c1;
+    color:  	#f8db27;
+    padding: 10px;
+    font-weight: bolder;
+    font-size: 25px;
+    text-align: center;
+}
+
+.firstRow {
+    display: flex;
+    height: 180px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.scoreSheetHuman {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color:#f8db27;
+    font-size: 40px;
+    font-weight: bold;
+
+}
+
+.scoreSheetComputer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color:#f8db27;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: -100px;
+}
+
+
+body {
+    background-color: #2f64d6;
+}
+
+.scoreComputer {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 83px;
+    width: 140px;
+    margin-top: -230px;
+    margin-left: 83px;
+    transform: rotate(4deg);
+    background-color:  	#9c5b01;
+    color:#f8db27;
+}
+
+.scoreHuman {
+    background-color: white;
+    height: 69px;
+    width: 97px;
+    margin-top: -348px;
+    margin-left: 150px;
+    transform: rotate(10deg);
+    background-color:  	#9c5b01;
+    color:#f8db27;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.description {
+    margin-top: 250px; /* Adjust this value as needed */
+    text-align: center;
+    color: #f8db27;
+}
+
+.rules {
+    font-size: 1.2em;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 50px;
+   
+} 
+
+.buttons img {
+    border: 5px solid black;
+    padding: 10px;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+
+.buttons img:hover {
+    transform: scale(1.2);
+}
+
+.textfield {
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 400px;
+    padding: 8px;
+    height: 150px;
+    margin-top: 300px;
+    border: 5px dotted black;
+    border-radius: 9px;
+    color:#f8db27;
+    font-size: 1.5em;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+
+}
+
+.footer {
+    position: fixed;
+    display: flex;
+    height: 50px;
+    background-color: grey;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: black;
+}
+
